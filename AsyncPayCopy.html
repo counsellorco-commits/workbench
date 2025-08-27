@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsyncPay Copy</title>
+    <link rel="icon" type="image/x-icon" href="AsyncPay/Logo.png">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <script src="https://kit.fontawesome.com/12aa1906cb.js" crossorigin="anonymous"></script>
+    <style>
+        body{
+            text-align: center;
+        }  
+        *{
+            background-color: rgb(20, 22, 34);
+            font-family:"Trebuchet MS", Helvetica, sans-serif;
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+            color:white;
+            --grey:#353b43;
+            --blue:#2C7EED;
+        }        
+        #BetaMsg{
+            vertical-align: middle;
+            padding-top: 10px;
+            background-color: rgb(101, 114, 230);
+            height: 38px;
+            font-size:large;
+        }
+        .blueBtn{
+            cursor:pointer;
+            background-color: var(--blue);
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            padding:15px 25px; 
+            transition:all 0.5s linear;
+        }
+        .blueBtn:hover{
+            background-color: #5687cb;
+        }
+        .TransparentBtn{
+            transition: 0.5s linear;
+            cursor:pointer;
+            font-weight: bold;
+            border:1px solid var(--grey);
+            border-radius: 5px;
+            padding:15px 25px; 
+        }
+        .TransparentBtn:hover{
+            background-color: rgb(217, 217, 217);
+        }
+        li{
+            list-style-type: none;
+            display:inline;
+            cursor: default;
+        }
+        a{  
+            height: fit-content;
+            width: fit-content;
+            text-decoration: none;
+        }
+        nav{ 
+            height:70px;
+            width: 100%;
+            position:sticky;
+            z-index: 6;
+            padding-left: 25px;
+            top:0;
+            margin:2px 0 0;
+        }
+        nav div{
+            grid-template-columns: 1fr 1fr;
+            display:grid;
+            gap:5px;
+            float:right;
+            line-height: 50px;
+            padding:8px 10px 8px 0;
+        }
+        nav img{
+            display:none;
+            cursor:pointer;
+            height: 25px;
+            padding-top: 5px;
+            padding-right: 10px;
+        }
+        #ExploreAsyncpay{
+            float:left;
+            display:grid;
+            gap:10px;
+            grid-template-columns: 79px 49px 79px 42px; 
+            height:inherit;
+            margin-left: 25px;
+            text-align: center;
+        }
+        .AsyncPayLink{
+            line-height: 65px;
+        }
+        .Home{
+            float:left;
+            line-height: 55px;
+            font-size: 30px;
+            font-family: 'Century Gothic', Futura, sans-serif;
+            font-weight: bold;
+            padding:0 0 0 20px;
+            background-image: url(AsyncPay/LogoBW2.png);
+            background-size: 20px 23px;
+            background-repeat: no-repeat;
+            background-position: left bottom 42%;
+        }
+        #animator{
+            border-top: 1px solid var(--grey);
+            margin-bottom: 100px;
+            content:'';
+            animation-name: animate;
+            animation-duration: 1.5s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+        
+        #Container{
+            z-index: 1;
+            display:grid;
+            position:relative;
+            margin: 0 20px;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap:20px;
+            grid-template-areas:
+                "intro intro intro intro"
+                "pDemo pDemo pDemo pDemo"
+                "intro2 intro2 intro2 intro2"
+                "pstack pstack pstack pstack"
+                "iSwitch iSwitch iSwitch iSwitch"
+                "fluttr fluttr fluttr fluttr"
+                "stripe stripe stripe stripe"
+                ". . . ."
+                "Perk_1 Perk_1 Perk_1 Perk_1"
+                "decisionPerk decisionPerk decisionPerk decisionPerk"
+                "unityPerk unityPerk unityPerk unityPerk"
+                "syncedSub syncedSub syncedSub syncedSub"
+                "dashBoard dashBoard dashBoard dashBoard"
+                "h3 h3 h3 h3"
+                "FAQs FAQs FAQs FAQs"
+                "joinNow joinNow joinNow joinNow";
+        }
+        #intro-1{
+            text-align: left;
+            grid-area: intro;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-around;
+            padding-bottom: 50px;
+        }
+        #intro-1 h1{
+            font-size: 40px;
+        }
+        #intro-1 p{
+            color:rgb(187, 186, 186);
+            margin-bottom: 40px;
+            font-size: 20px;
+        }
+        #intro-1 button{
+            width: 60%;
+        }
+        #paymentDemo{
+            grid-area: pDemo;
+            display:flex;
+            margin: 0 auto;;
+        }
+        #paymentDemo img{
+            width:min(90vw, 100%);
+        }
+        #intro-2{
+            grid-area: intro2;
+            font-size:12px;
+            padding: 50px 0 30px 0;
+            text-align: left;
+        }
+        .gradientBox{
+            padding: 2px;
+            display:flex;
+            justify-content: center;
+            text-align: left;
+            border-radius: 5%;
+
+        }
+        .pstack{
+            background-image: linear-gradient(to bottom left,#0c99cc00, #0C99CC);
+            grid-area: pstack;
+        }
+        .iSwitch{
+            background-image: linear-gradient(to top left,#E1292700,#E12927);
+            grid-area: iSwitch;
+        }
+        .fluttr{
+            background-image: linear-gradient(to top right, rgba(242,157,17,0), rgba(242,157,17,1));
+            grid-area: fluttr;
+        }
+        .stripe{
+            background-image: linear-gradient(to bottom right,#5950FF00, #5950FF);
+            grid-area: stripe;
+        }        
+        .PaymentCh{
+            padding: 100px 20px 20px;
+            border-radius: 5%;
+        }
+        .PaymentCh h2,p{
+            background-color: transparent;
+        }
+        #pstackStub{
+            background:rgb(20, 22, 34) url(AsyncPay/Paystack\ logo.png) top 15px left 5px no-repeat;
+            background-size: 60px;
+            transition: all 1s ease-in-out;
+        }
+        #iswitchStub{
+            background:rgb(20, 22, 34) url(AsyncPay/interswitchLogo.png)top 14px left 1px no-repeat;
+            background-size: 60px;
+            transition: all 1s ease-in-out;
+        }
+        #fluttrwaveStub{
+            background:rgb(20, 22, 34) url(AsyncPay/flutterwaveLogo.png) top 15px left 9px no-repeat;
+            background-size: 60px;
+            transition: all 1s ease-in-out;
+        }
+        #stripeStub{
+            background:rgb(20, 22, 34) url(AsyncPay/StripeLogo.png) top 13px left 5px no-repeat;
+            background-size: 45px;
+            transition: all 1s ease-in-out;
+        }
+        #stripeStub:hover{
+            background:#5950FF url(AsyncPay/WStripeLogo.png) top 13px left 5px no-repeat;
+            background-size: 36px;
+            cursor:pointer;
+        }
+        #fluttrwaveStub:hover{
+            background:rgba(242,157,17,1) url(AsyncPay/WflutterwaveLogo.png) top 13px left 5px no-repeat;
+            background-size: 50px;
+            cursor:pointer;
+        }
+        #iswitchStub:hover{
+            background:#E12927 url(AsyncPay/WhiteinterswitchLogo.png) top 14px left 1% no-repeat;
+            background-size: 50px;
+            cursor:pointer;
+        }
+        #pstackStub:hover{
+            background:#0C99CC url(AsyncPay/WhitePaystack\ logo.png) top 13px left 5px no-repeat;
+            background-size: 50px;
+            cursor:pointer;
+        }
+        .perk{
+            display:flex;
+            padding:10px;
+            flex-flow: column;
+            border:1px solid rgb(33, 36, 51);
+            border-radius: 3%;
+        }
+        .perk>:nth-child(n){
+            margin:10px
+        }
+        #pgrammerPerk{
+            grid-area: Perk_1;
+            background-color: rgb(33, 36, 51);
+        }
+        .nugget{
+            width: 60px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            height:60px;
+            padding-left: 2px;;
+            border: 1px solid var(--blue);
+            border-radius: 20%;
+        }
+        #pgPerk-1{
+            margin-bottom: 40px;
+            display: flex;
+            background-color: inherit;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #pgPerk-1 p{
+            display:flex;
+        }
+        #pgPerk-1 :not(:last-child){
+            margin: 20px auto;
+        }
+        #pgPerk-1 img{
+            border-radius: 20%;
+        }
+        #JsonInstance{
+            font-size: 18px;
+            text-align: left;
+            border-radius: 3%;
+            width:560px;
+            height:350px;
+            padding:30px;
+            margin:0 auto;
+        }
+        #JsonObject{
+            margin: 10px auto 5px;
+            height:90%;
+            padding:30px 0 0 0;
+            border-radius: 3%;
+            border:1px solid var(--grey);
+
+        }
+        #JsonInstance > span{
+            padding:5px 10px;
+            font-size: 18px;
+            background-color: var(--grey);
+            border-radius: 20%;
+        }
+        .fluttrClr{
+            color: rgba(154, 182, 14, 0.771);
+            background-color: transparent;
+            animation-name: F_anim;
+            animation-timing-function: linear;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-fill-mode:initial;
+        }
+        #channelSwap{
+            color: rgb(20, 22, 34);
+            font-family: monospace;
+            animation-name: ChannelbgSwap;
+            animation-timing-function: linear;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-fill-mode: both;
+        }
+        .stripeClr{
+            color: #6546e0;
+            background-color: transparent;
+            animation-name: S_anim;
+            animation-timing-function: linear;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-fill-mode:initial;
+        }
+        .pstackClr{
+            color: #04bcff;
+            background-color: transparent;
+            animation-name: P_anim;
+            animation-timing-function: linear;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-fill-mode:initial;
+        }
+        .iSwitchClr{
+            color: #d31815;
+            background-color: transparent;
+            animation-name: I_anim;
+            animation-timing-function: linear;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-fill-mode:initial;
+        }
+        #swap{
+            line-height: 1.5em;
+            font-family: monospace;
+            animation-name: bgSwap;
+            animation-timing-function: linear;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-fill-mode: both;
+        }
+        #unificationPerk{
+            grid-area: unityPerk;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            align-items:flex-start;
+        }
+        #unificationPerk div img{
+            border-radius: 20%;
+        }
+        #decisionPerk{
+            grid-area: decisionPerk;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            align-items:flex-start;
+        }
+        #decisionPerk div img{
+            height:40px;
+        }
+        .perk>img{
+            width:81vw;
+        }
+        #syncedSubsPerk{
+            grid-area: syncedSub;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(33, 36, 51);
+        }
+        .perk .perk{
+            text-align: left;
+            background-color: rgb(33, 36, 51);
+        }
+        .perk h2{
+            font-size: 40px;
+        }
+        .perk p{
+            font-size: 20px;
+        }
+        #syncedSubsPerk .nugget>img{
+            border-radius: 50%;
+        }
+        #syncedSubsPerk>img{
+            border-radius: 4%;    
+        }
+        #dashboardPerk{
+            border: none;
+            grid-area: dashBoard;
+        }
+        h3{
+            grid-area: h3;
+            font-size: 25px;
+        }
+        hr{
+            border: 1px solid var(--grey)
+        }
+        .Question{
+            margin:15px 5px 10px;
+        }
+        .Question img{
+            vertical-align:middle;
+            float: right;
+        }
+        .Question [id*=q]{
+            width:calc(100%-30px);
+            display:inline;
+        }
+        .Answer{
+            margin-top: 20px;
+            color: #49586d;
+            transition:height 0.5s linear;
+            font-size: 0px;
+        }
+        #FAQs{
+            grid-area: FAQs;
+            text-align: left;
+        }
+        #joinNow{
+            background-color: rgb(33, 36, 51);
+            grid-area: joinNow;
+            border-radius: 15px;
+        }
+        #joinNow>:nth-child(n){
+            background-color: inherit;
+        }
+        #joinNow h2{
+            font-size: 1.3em; 
+            margin-bottom: 40px;
+        }
+        #joinNow button{
+            font-size: smaller;
+        }
+        #bottomNav .Home{
+            line-height: normal;
+            background-position: left bottom 2px;;
+            grid-area: lastHome;
+        }
+        #bottomNav .Home a{
+            font-family: inherit;
+        }
+        #sp{
+            grid-area:sp;
+        }
+        #bottomNav{
+            font-size: 1em;
+            text-align: left;
+            display:grid;
+            width:100%;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid rgb(33, 36, 51);
+            border-bottom: 1px solid rgb(33, 36, 51);
+            margin-top: 50px;
+            padding: 30px 40px 60px;
+            column-gap: 10px;
+            row-gap: 15px;
+            grid-template-areas: 
+            "lastHome ."
+            "lastHome ."
+            "lastHome ."
+            "Explore ."
+            "Explore ."
+            ". ."
+            "sp ."
+            ". ."
+            ". ."
+            "mail ."
+            ". ."
+            ". ."
+            ". .";
+        }
+        #ExploreFooter{
+            grid-area: Explore;
+            width:125px;
+        }
+        #mailAsyncPay{
+            grid-area: mail;
+            width: 125px;
+        }
+        footer{
+            height:80px; 
+            display: flex;
+            margin: 10px 20px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+        footer span{
+            font-size: larger;
+            width:102px;
+            height:19.5px;
+            display:grid;
+            gap: 15px;
+            color: rgb(33, 36, 51);
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        h4{
+            font-weight: 100;
+            width: fit-content;
+        }
+        #overlay{
+            display:none;
+            font-size: 20px;
+            z-index: 4;
+            position:fixed;
+            width:100%;
+            height: 100%;
+            background-color:#2e394951;
+
+
+        }
+        #Vnav{
+            display:none;
+            position:fixed;
+            right:0;
+            top:0;
+            z-index: 5;
+            width:60%;
+            height:100%;
+            background-color:#2e3949;
+
+
+        }
+        #Vnav>div{
+            font-size: 20px;
+            text-align: left;
+            background-color: inherit;
+            padding: 85px 0 0 30px;
+
+        }
+        .navp{
+            padding: 10px 0;
+        }
+
+
+
+        @media screen and (max-width:624px) {
+
+            #JsonInstance{
+            font-size: 12px;
+            width:392px;
+            height:245px;
+            padding:21px;   
+            }
+            #JsonObject{
+            margin: 7px auto 3.5px;
+            padding:21px 0 0 0;
+
+            }
+            #JsonInstance > span{
+            padding:3.5px 7px;
+            font-size: 14px;
+            }
+            
+        }
+        @media screen and (min-width:624px) {#Container{
+                grid-template-areas:
+                "intro intro intro intro"
+                "pDemo pDemo pDemo pDemo"
+                "intro2 intro2 intro2 intro2"
+                "pstack pstack iSwitch iSwitch"
+                "fluttr fluttr stripe stripe"
+                ". . . ."
+                "Perk_1 Perk_1 Perk_1 Perk_1"
+                "decisionPerk decisionPerk decisionPerk decisionPerk"
+                "unityPerk unityPerk unityPerk unityPerk"
+                "syncedSub syncedSub syncedSub syncedSub"
+                "dashBoard dashBoard dashBoard dashBoard" 
+                "h3 h3 h3 h3"
+                "FAQs FAQs FAQs FAQs"
+                "joinNow joinNow joinNow joinNow";
+            }       
+            .perk>img{
+                width:unset;
+            }
+            .perk .perk{
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            #intro-2{
+                margin-top: 100px;
+                font-size: 25px;
+                text-align: center;
+            }
+            #intro-1{
+                text-align: center;
+            }
+            #intro-1 h1{
+                font-size: 50px;
+                padding-bottom: 0;
+            }
+            #joinNow h2{
+                font-size: 2.5em;
+            } 
+        }
+        
+        @media screen and (min-width:520px) {
+
+            #bottomNav{
+                grid-template-columns: 250px 200px;
+                grid-template-areas: 
+            "lastHome lastHome"
+            ". ."
+            ". ."
+            "Explore mail"
+            ". ."
+            ". ."
+            "sp .";
+            }
+                footer{ 
+                display:block;
+                height: 20px;
+                margin: 40px 20px;
+            }    
+            h4{
+                float:left
+            }
+            footer span{
+                float:right;
+            }
+        }
+        @media screen and (min-width:950px) {
+            #sp{
+                display:none;
+            }
+            #bottomNav{
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: 
+            "lastHome lastHome"
+            ". ."
+            ". ."
+            "Explore mail"
+            ". ."
+            ". ."
+            ". .";
+            }
+        }
+        @media screen and (max-width:735px) {
+
+            #ExploreAsyncpay,nav div a{
+                display:none;
+            }
+            nav img{
+                display:unset;
+                margin: 8px 0 2px 0;
+            }
+            nav div{
+                display:unset;
+                height:100%;
+                line-height: 45px;
+                padding:0 10px 0 0;
+            }
+            nav{
+                height:45px;
+            }
+            nav .Home{
+                line-height: 40px;
+            }
+            #overlay{
+            display:none;
+        }
+        #Vnav{
+            display:none;
+        }
+        }
+        
+        @media screen and (min-width:1200px) {
+            footer{
+                width: 1180px;
+                margin: 40px auto;
+            }
+            #bottomNav{
+                grid-template-areas: 
+            "lastHome lastHome"
+            "Explore mail"
+            ". ."
+            ". ."
+            ". .";
+            }
+
+            
+            nav{
+                width:1180px;
+                margin:0 auto;
+            }
+            #animator{
+                width:1180px;
+                margin:0  auto 30px auto;
+            }
+            #Container{
+                width: 1180px;
+                margin:0 auto;
+            }
+            #intro-1{
+                text-align: left;
+            }  
+            
+            #Container{
+                grid-template-areas: 
+                "intro intro pDemo pDemo"
+                "intro2 intro2 intro2 intro2"
+                "pstack iSwitch fluttr stripe"
+                ". . . ."
+                "Perk_1 Perk_1 Perk_1 Perk_1"
+                ". . . ."
+                "decisionPerk decisionPerk unityPerk unityPerk"
+                ". . . ."
+                "syncedSub syncedSub syncedSub syncedSub"
+                "dashBoard dashBoard dashBoard dashBoard" 
+                "h3 h3 h3 h3"
+                "FAQs FAQs FAQs FAQs"
+                "joinNow joinNow joinNow joinNow";
+            }
+            
+            #bottomNav{
+                width: 1180px;
+                margin:50px auto 0;
+            }
+        }
+
+        @media screen and (min-width:1280px) {
+
+            #pgrammerPerk{
+                flex-direction: row;
+                align-items: last baseline;
+                padding:50px;
+            }
+            #syncedSubsPerk .perk{
+                order:2;
+                align-items: start;
+                text-align: left;
+            }
+            #syncedSubsPerk>img{
+                order:1
+            }
+            #syncedSubsPerk.perk{
+                flex-direction: row;
+            }
+            #pgPerk-1{
+                height: 350px;
+                justify-content: space-around;
+                align-items: start;
+                text-align: left;
+            }
+            #pgPerk-1 .nugget{
+                align-self: start;
+                margin:initial 0;
+            }
+            #pgPerk-1>:nth-child(n){
+                margin: unset;
+                text-align: left;
+            }
+            #sp{
+                display:block;
+            }
+            #bottomNav{
+                grid-template-columns: 300px 250px 250px;
+                grid-template-areas: 
+            "lastHome Explore mail"
+            "lastHome Explore mail"
+            "lastHome Explore mail"
+            "lastHome Explore mail"
+            ". . ."
+            ". . ."
+            "sp . .";
+            }
+        }
+
+        
+        @media screen and (min-width:1088px) {
+            
+            #paymentDemo img{
+                width: min(unset,40vw);
+        }
+        }
+        @keyframes I_anim {
+            0%{color: #d31815;}
+            24%{color: #d31815;}
+            25%{color:#ce605f;}
+            26%{color: #d31815;}
+            49%{color:#d31815;}
+            50%{color: #ce605f;}
+            51%{color:#d31815;}
+            74%{color:#d31815;}
+            75%{color:#ce605f;}
+            76%{color:#d31815;}
+            99%{color:#d31815;}
+            100%{color:#ce605f;}
+
+
+        }/*I #d31815 P #04bcff S #6546e0 F rgba(154, 182, 14, 0.771)*/   
+        @keyframes S_anim {
+            0%{color: #6546e0;}
+            24%{color: #6546e0;}
+            25%{color:#907ae4;}
+            26%{color: #6546e0;}
+            49%{color:#6546e0;}
+            50%{color:#907ae4;}
+            51%{color:#6546e0;}
+            74%{color:#6546e0;}
+            75%{color:#907ae4;}
+            76%{color:#6546e0;}
+            99%{color:#6546e0;}
+            100%{color:#907ae4;}
+        }
+        @keyframes F_anim {
+            0%{color: rgba(154, 182, 14, 0.771);}
+            24%{color: rgba(154, 182, 14, 0.771);}
+            25%{color:rgba(163, 180, 82, 0.771)}
+            26%{color: rgba(154, 182, 14, 0.771);}
+            49%{color:rgba(154, 182, 14, 0.771);}
+            50%{color:rgba(163, 180, 82, 0.771);}
+            51%{color:rgba(154, 182, 14, 0.771);}
+            74%{color:rgba(154, 182, 14, 0.771);}
+            75%{color:rgba(163, 180, 82, 0.771);}
+            76%{color:rgba(154, 182, 14, 0.771);}
+            99%{color:rgba(154, 182, 14, 0.771);}
+            100%{color:rgba(163, 180, 82, 0.771);}
+        }
+        @keyframes P_anim {
+            0%{color: #04bcff;}
+            24%{color: #04bcff;}
+            25%{color:#63d5ff;}
+            26%{color: #04bcff;}
+            49%{color:#04bcff;}
+            50%{color:#63d5ff;}
+            51%{color:#04bcff;}
+            74%{color:#04bcff;}
+            75%{color:#63d5ff;}
+            76%{color:#04bcff;}
+            99%{color:#04bcff;}
+            100%{color:#63d5ff;}
+        }
+        @keyframes animate {
+            from{margin-bottom: 100px;}
+            to{margin-bottom: 20px;}
+            
+        }
+
+        @keyframes bgSwap {
+            0%{background-color:#6546e041;}
+            24%{background-color:#6546e041;}
+            25%{background-color:rgba(154, 182, 14, 0.237);}
+            49%{background-color:rgba(154, 182, 14, 0.237);}
+            50%{background-color:#d3181541;}
+            74%{background-color:#d3181541;}
+            75%{background-color:#04bcff41;}
+            99%{background-color:#04bcff41;}
+            100%{background-color:#6546e041;}            
+        }
+        @keyframes ChannelbgSwap {
+            0%{background-color:#6546e070;}
+            24%{background-color:#6546e070;}
+            25%{background-color:rgba(154, 182, 14, 0.237);}
+            49%{background-color:rgba(154, 182, 14, 0.407);}
+            50%{background-color:#d318159f;}
+            74%{background-color:#d318159f;}
+            75%{background-color:#04bcff70;}
+            99%{background-color:#04bcff70;}
+            100%{background-color:#6546e070;}
+        }
+
+    </style>
+</head>
+
+<body>
+    <div onclick="toggleMenu()" id="overlay"></div>
+    <div id="Vnav">
+        <div>
+        <a href="https://asyncpay.gitbook.io/api-documentation/" target="_blank"><p class="navp">Developers</p></a><br>
+        <a href="mailto:info@asyncpay.io" target="_blank"><p class="navp">Pricing</p></a><br>
+        <a href="mailto:info@asyncpay.io" target="_blank"><p class="navp">Contact us</p></a><br>
+        <a href="mailto:info@asyncpay.io" target="_blank"><button class="blueBtn">Sign in</button></a>
+        </div>
+    </div>
+
+    <div id="BetaMsg">We're currently in beta! 🥳</div>
+    <nav>
+        <a href="https://asyncpay.io/"><span class="Home">asyncpay</span></a>
+        <ul id="ExploreAsyncpay">
+            <li  class="AsyncPayLink"><a href="https://asyncpay.gitbook.io/api-documentation/" ><span>Developers</span></a></li>
+            <li  class="AsyncPayLink"><a href="info@asyncpay.io"><span>Pricing</span></a></li>
+            <li  class="AsyncPayLink"><a href="info@asyncpay.io"><span>Contact&nbsp;us</span></a></li>
+            <li  class="AsyncPayLink"><a href="https://asyncpay.io/demo"><span>Demo</span></a></li>
+        </ul>
+        <div>
+            <a href="https://dashboard.asyncpay.io/"><button class="TransparentBtn">Log In</button></a>
+            <a href="https://dashboard.asyncpay.io/sign-up/"><button class="blueBtn">Sign Up</button></a>
+            <img id="menu" alt="dropdown hamburger menu" src="AsyncPay/hamburger-menu.png" onclick="toggleMenu()">
+        </div>
+    </nav>
+    <div id="animator"></div>
+    <div id="Container">
+        <div id="intro-1">
+            <h1>One integration, limitless payment providers.</h1>
+            <p>
+                Receive payments from multiple payment gateways with one simple integration, collect funds from Paystack, Flutterwave, etc and get an intuitive embeddable dashboard to keep track of all your funds from one place.
+            </p>
+            <button class="blueBtn">Get started — it's free</button>
+        </div>
+        <div id="paymentDemo">
+            <img alt="payment Demo" src="AsyncPay/paymentDemo.svg">
+        </div>
+        <div id="intro-2">
+            <h1>
+                Asyncpay provides access to multiple payment channels, and a unifying dashboard to track your funds.
+            </h1>
+        </div>
+        <div class="gradientBox pstack">
+            <div class="PaymentCh" id="pstackStub">
+                <h2>
+                Paystack
+                </h2>
+                <p>
+                    Paystack helps new generation of innovative, forward-looking businesses in Africa get paid by anyone, anywhere in the world.
+                </p>
+            </div>
+        </div>
+        <div class="gradientBox iSwitch">
+            <div class="PaymentCh" id="iswitchStub">
+                <h2>
+                Interswitch
+                </h2>
+                <p>
+                    Interswitch is a Nigerian payment company providing digital payment and transaction processing services for consumers and businesses.
+                </p>
+            </div>
+        </div>
+        <div class="gradientBox fluttr">
+            <div  class="PaymentCh" id="fluttrwaveStub">
+                <h2>
+                    Flutterwave
+                </h2>
+                <p>
+                    Flutterwave enables businesses sell online, process payments, create financial products, and offer business tailored for growth.
+                </p>
+            </div>
+        </div>
+        <div class="gradientBox stripe">
+            <div class="PaymentCh" id="stripeStub">
+                <h2>
+                    Stripe
+                </h2>
+                <p>
+                    Stripe is a suite of APIs powering online payment processing and commerce solutions for internet businesses of all sizes.
+                </p>
+            </div>
+        </div>
+        <div class="perk" id="pgrammerPerk">
+            <div id="pgPerk-1">
+                <div class="nugget">
+                    <img src="AsyncPay/codeSign2.png" height="25" alt="Code Sign">
+                </div>
+                <h2 style="background-color: inherit;">Code once, connect everywhere</h2>
+                <p>
+                    With Asyncpay you never have to worry about integrating multiple frontend SDKs or multiple backends. Just connect one light-weight SDK and have universal checkout at your fingertips
+                </p>
+                <a href="https://dashboard.asyncpay.io/sign-up"><button class="blueBtn">Sign Up &rarr;</button> </a>
+            </div>
+            <div id="JsonInstance">
+                <span>Json</span>
+                <div id="JsonObject">
+                    <pre> <code class="stripeClr">1.</code> <code class="pstackClr">{</code> </pre><br> 
+                    <pre> <code class="stripeClr">2.</code>      <code class="pstackClr">"</code><code class="fluttrClr">customer-email</code><code class="pstackClr">"</code><code class="iSwitchClr">:</code> <code class="pstackClr">"</code><code class="fluttrClr">arneslot@gmail.com</code><code class="pstackClr">",</code></pre> <br>
+                    <pre> <code class="stripeClr">3.</code>      <code class="pstackClr">"</code><code class="fluttrClr">amount</code><code class="pstackClr">"</code><code class="iSwitchClr">:5000</code><code class="pstackClr">,</code> </pre> <br>
+                    <pre id="swap"><code class="stripeClr"> 4.</code>      <code class="pstackClr">"</code><code class="fluttrClr">payment_channel</code><code class="pstackClr">"</code><code class="iSwitchClr">:</code> <code id="channelSwap"> "stripe" </code></pre>
+                    <br>
+                    <pre> <code class="stripeClr">5.</code> <code class="pstackClr">}</code> </pre><br>
+                </div>
+            </div> 
+        </div>
+        <div class="perk" id="decisionPerk">
+                <div class="nugget">
+                    <img src="AsyncPay/newTag.png" height="25" alt="Tag Sign">
+                </div>
+                <h2 style="background-color: inherit;">Checkouts shouldn’t be expensive</h2>
+                <p>
+                    Allow Asyncpay’s smart systems to calculate the cheapest payment channel to use for a transaction factoring in things like amount, country etc
+                </p>
+                <img src="AsyncPay/cheap-checkouts.svg" alt="Cheap Checkouts">
+
+        </div>
+        <div class="perk" id="unificationPerk">
+                <div class="nugget">
+                    <img src="AsyncPay/lowCellSign.png" height="25" alt="Cell Sign">
+                </div>
+                <h2 style="background-color: inherit;">Unified data</h2>
+                <p>
+                    A major consumer of development time is energy spent trying to understand the structure of different transaction data provided by these platforms. Allow Asyncpay to do the heavy lifting for you and provide unified, consistent data structures regardless of the payment channel you’re connecting to.
+                </p>
+                <img src="AsyncPay/unified-data.svg" alt="unified data model">
+
+        </div>
+        <div class="perk"  id="syncedSubsPerk">
+            <div class="perk">
+                    <div class="nugget">
+                        <img src="AsyncPay/dollar.png" height="30" alt="Dollar sign">
+                    </div><br>
+                    <h2 style="background-color: inherit;">Synchronize Subscriptions</h2>
+                    <p>
+                        Leave the headache of subscriptions in the past. Asyncpay provides seamless, modern ways to manage and unify your subscriptions across all your payment channels. No hiccups, no hassles.
+                    </p>
+                    <a href="https://dashboard.asyncpay.io/sign-up" target="_blank"><button class="TransparentBtn">Sign Up</button></a>
+            </div>
+            <img src="AsyncPay/sysubscriptions.svg" alt="Synced subscriptions">
+        </div>
+        <div class="perk"id="dashboardPerk">
+            <h2 style="background-color: inherit;">Single Dashboard for all Payments</h2>
+            <p>
+                Leave the headache of jumping from dashboard to dashboard to keep track of payments made to your platform. Asyncpay provides a unifying dashboard to keep track of all funds made across all the payment channels you connect to.
+            </p>
+            <img src="AsyncPay/dashboard.png" alt="Asyncpay Dashboard outlook">
+        </div>
+        <h3>Frequently Asked Questions</h3>
+        <div id ="FAQs">
+            
+            <hr>
+            <div class="Question">
+                <img src="AsyncPay/show.png" alt="show button" onclick="toggle(event,'a1')">
+                <p id="q1">
+                    What is a payment channel?
+                </p>
+                <p name="a1" id="a1"class="Answer">
+                    Within the context of Asyncpay, a payment channel is connection to a payment provider that allows businesses to receive money on the internet e.g Paystack, Stripe, Flutterwave. When you create a payment channel, Asyncpay can connect to a payment provider like Paystack through that payment channel. A payment channel is always tied to a payment provider.
+                </p>
+            </div>
+
+            <hr>
+            <div class="Question">
+                <img src="AsyncPay/show.png" alt="show button" onclick="toggle(event,'a2')">
+                <p id="q2">
+                    What types of payment methods can I use on Asyncpay?
+                </p>
+                <p name="a2" id="a2"class="Answer">
+                    Asyncpay support card payments across multiple payment providers. We will be supporting lots of other payment methods like USSD and bank transfers by Q3 2023.
+                </p>
+            </div>
+
+            <hr>
+            <div class="Question">
+                <img src="AsyncPay/show.png" alt="show button" onclick="toggle(event,'a3')">
+                <p id="q3">
+                    How many payment providers does Asyncpay support?
+                </p>
+                <p name="a3"id="a3"class="Answer">
+                    Asyncpay currently supports three payment providers: Paystack, Stripe and Flutterwave. We'll be providing support for a whole lot more in the coming months. We intend to have at least 20 connections by the end of Q3.
+                </p>
+            </div>
+
+            <hr>
+            <div class="Question">
+                <img src="AsyncPay/show.png" alt="show button" onclick="toggle(event,'a4')">
+                <p id="q4">
+                    Are my customers' information secured?
+                </p>
+                <p name="a3" id="a4"class="Answer">
+                    Yes, Asyncpay takes a lot of measures to ensure your customer information is secure. We encrypt all sensitive data stored in our systems and adhere to all best practices for managing user data.
+                </p>
+            </div>
+
+            <hr>
+            <div class="Question">
+            <img  src="AsyncPay/show.png" alt="show button"onclick="toggle(event,'a5')">
+                <p id="q5">
+                    Do you offer customer support if I have questions or issues with using your system?
+                </p>
+                
+                <p name = "a5"id="a5"class="Answer">
+                    Definitely! Feel free to reach out to us at info@asyncpay.io and we'll respond immediately
+                </p>
+            </div>
+
+            <hr>
+            <div class="Question">
+                <img src="AsyncPay/show.png" alt="show button" onclick="toggle(event,'a6')">
+                <p id="q6">
+                    Does Asyncpay provide webhooks?
+                </p>
+                <p name="a6" id="a6"class="Answer">
+                    Yes, we push webhooks for all events that happen in your system and we provide multiple ways of staying in the know, including sms and email. We also do the heavy work of getting the webhooks from all the payment channels you connect to and sending it all to you in one consistent format. You don't have to worry how any payment channel structures their data. Asyncpay has you covered.
+                </p>
+            </div>
+        </div>
+        <div class="perk" id="joinNow">
+            <h2>Say goodbye to payment headaches and hello to hassle-free payments.</h2>
+            <div>
+                <a href="" target="_blank"><button class="blueBtn">Sign up for free</button></a>
+                <a href="" target="_blank"><button class="TransparentBtn">Contact Sales</button></a>
+            </div>
+        </div>
+    </div>
+    <section id="bottomNav">
+        <div>
+            <p class="Home"><a href="https://asyncpay.io/" target="_blank">asyncpay</a></p>
+        </div>
+        
+        <div id="ExploreFooter">
+            <p id="qlinks" ><a href="https://asyncpay.io/" target="_blank">Quick links</a></p>
+            <br><br>
+            <p><a href="https://asyncpay.gitbook.io/api-documentation/" target="_blank">Documentation</a></p>
+            <br>
+            <p><a href="mailto:info@asyncpay.io" target="_blank">Pricing</a></p>
+            <br>
+            <p><a href="https://asyncpay.io/terms-of-use" target="_blank">Terms of use</a></p>
+        </div>
+        <div id="mailAsyncPay">
+            <p><a href="mailto:info@asyncpay.io" target="_blank">Contact</a></p>
+            <br>
+            <br>
+            <p><a href="mailto:info@asyncpay.io" target="_blank">info@asyncpay.io</a></p>
+        </div>
+        <div id="sp"></div>
+        
+    </section>
+    <footer>
+        <h4>&copy; Venar Ltd 2025. All rights reserved</h4>
+        <span>
+            <a class="fa-brands fa-linkedin"></a>
+            <a class="fa-brands fa-x-twitter" href="https://twitter.com/asyncpay_io" target="_blank"></a>
+            <a class="fa-brands fa-github" href="https://github.com/Asyncpay-io?type=source" target="_blank"></i></a>
+        </span>
+
+    </footer>
+</body>
+<script>
+    let shown = false;
+    function toggleMenu(){
+        const menU = document.getElementById("menu");
+        const VnaV = document.getElementById("Vnav");
+        const overL = document.getElementById("overlay");
+        if (!shown){
+            menu.src= "AsyncPay/close.png";
+            VnaV.style.display = "block";
+            overL.style.display= "block";
+        }
+        if(shown){
+            menu.src= "AsyncPay/hamburger-menu.png";
+            VnaV.style.display = "none";
+            overL.style.display= "none";
+
+        }
+        shown= !shown;
+    }
+    function toggle(ev,answer){
+        let ans = document.getElementById(answer);
+        let t = ev.target.alt;
+        console.log(t);
+        if(t=="hide button"){
+            ev.target.alt = "show button";
+            ev.target.src = "AsyncPay/show.png";
+            ans.animate([{
+                fontSize: "15px"
+            },
+            {
+                fontSize: "0px"
+            }
+            ],{duration:200,fill:"forwards"});
+        }
+        else {
+            ev.target.alt="hide button"
+            ev.target.src = "AsyncPay/hide.png";
+            ans.animate([{
+                fontSize: "0px"
+            },
+            {
+                fontSize:"15px"
+            }
+            ],{duration:200,fill:"forwards"});
+        };
+    }
+    const chSwap = document.getElementById("channelSwap");
+    let c = 0;
+    function switcher(){
+        switch(c){
+            case 0: c++; chSwap.innerHTML= ' "flutterwave" '; break;
+            case 1: c++; chSwap.innerHTML= ' "interswitch" '; break;
+            case 2: c++; chSwap.innerHTML= ' "paystack" '; break;
+            case 3: c = 0 ;chSwap.innerHTML= ' "stripe" '; break;
+            default: chSwap.innerHTML= ' "broken" ';
+        }
+    }   
+    setInterval(switcher, 1000);
+    document.onclose= clearInterval(switcher);
+
+
+</script>
+</html>

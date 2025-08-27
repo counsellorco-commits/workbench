@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>Portfolio Page</title>
+        <link rel="stylesheet" href="normalize.css">
+
+        <style>
+            *{
+                box-sizing: border-box;
+            }
+            body{
+                justify-content: center;
+                margin:0;
+                padding:0;
+                color: rgb(109, 108, 108);
+                background-image: linear-gradient(black, #000000c7, black);
+            }
+
+            a{
+                color: white;
+                text-decoration: none;
+                text-align: center;
+            }
+
+            .flexbox-container{
+
+                width:100%;
+                display:flex;
+                align-items: center;           
+
+            }
+
+            #top{
+
+                justify-content: center;
+                position:fixed;
+                margin:0;
+                top:0;
+                width:100%;
+                height: 40px;
+                background-color: rgb(39, 39, 39);
+                z-index: 3;
+
+            }
+
+            #top a{
+                height: 40px;
+                padding: 10px 20px;
+                color:white;
+
+            }
+            #top a:not(:first-child){
+            border-left: 1px solid black;
+            }
+            #top a:hover{
+
+                color:rgba(0, 0, 0, 0.5);
+
+            }
+
+            img{
+        
+                width:100%;
+                border: 2px solid rgb(32, 4, 32);
+    
+            }
+
+
+            .hero{
+
+                flex-direction: column;
+            }
+
+            #cz{
+                
+                height: 300px;
+                width: 300px;
+                background-image: url("https://media.istockphoto.com/id/837345268/photo/noir-movie-character.jpg?s=612x612&w=0&k=20&c=WGaAh-xWelYuEoxhUE69T4e4k45Bp-MTC6KLG7edN8Y=");
+                background-size: cover;
+                background-position: -70px 0px;
+                margin: 40px 0 20px;
+                border-radius: 50%;
+
+            }
+
+            .hero h1{
+        
+                font-size: 100%;
+                font-family: Arial, Helvetica, sans-serif;
+
+            }
+            #about{
+        
+                display:flex;
+                flex-direction: column;
+                width:90%;
+                border-radius: 10px;
+                padding-bottom: 10px;
+                align-items: center;
+                background-image: linear-gradient(#15011b,#15011ba1);
+                box-shadow: -5px -5px 10px black, 5px 5px 10px black;
+                justify-content:center;
+
+            }
+
+            #about p{
+                display: flex;
+                color: rgb(109, 108, 108);
+                font-family: Arial, Helvetica, sans-serif;
+                text-align:left;
+
+            }
+
+            .imgTextHolder{
+
+                display:flex;
+                flex-wrap:wrap;
+                justify-content:center;
+
+            }
+
+            #Text{
+
+                text-align:center;
+                width:40%;
+
+            }
+
+            #csharp{
+
+                width: 400px;
+                height: 400px;
+                background-size: cover;
+                margin:10px 30px;
+                background-image: url(https://media.istockphoto.com/id/2188069565/photo/young-asian-man-working-as-software-developer-coding-on-computer-in-modern-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZXqf49kSwE_QLd19NK0-tlG627s12B8bvg_ZGZTbRDM=);
+                background-position: center;
+            }
+
+            #projects{
+        
+                width: 100%;                
+                display:flex;
+                text-align: center;
+                flex-direction: column;
+                
+            
+            }
+
+            #projects a{
+                font-size: larger;
+                background-color: #15011b;;
+                border-radius: 10%;
+
+            }
+
+
+            #project{        
+                align-self: center;
+                width:85%;
+                flex-direction: row;
+                display:flex;
+                flex-wrap:wrap;
+                justify-content: center;
+                align-items: center;
+
+            }
+            .done{
+                position:relative;
+                height:300px;
+                width:300px;
+                border: 2px solid #15011b;
+                border-radius: 5px;
+                margin: 20px;
+            }
+            #LFCProj{
+                background-image: url(EdHughe2.jpg);
+                background-position: 40% 80%;
+                background-size: cover;
+            }
+
+            #BBC2{
+                position:relative;
+                background:url(place.png);
+                background-size: contain;
+            }
+            @keyframes Disappear {
+                0% {background-color: red; display:block; border-radius: 0; left:0; bottom:0;}
+                10% {background-color: red; display: none; border-radius: 0; left:0; bottom:0;}
+                32% {background-color: blue; display:none; border-radius: 50%; left:130px; bottom: -75px;}
+                33% {display:block}
+                38% {background-color: blue; display:none; border-radius: 50%; left: 130px; bottom:-75px;}
+                66% {background-color: green; display:none; border-radius: 0; left:246px; bottom:-181px;}
+                67% {display:block;}
+                88%{background-color: green; display:none; border-radius: 0; left: 246px; bottom:-181px;}
+                100% {background-color: red; display:none; border-radius: 0; left:0; right:0;}
+            }
+            #shapeShift{
+                animation: Disappear 5s linear infinite normal;
+                width: 50px;
+                height: 50px;
+                position: relative;
+                left:0;
+                right:0;
+                display:block;
+                background-color: red;
+                border-radius: 0;
+            }
+            #AsyncPay{
+                background-image: url(Asyncpay\ ss.jpg);
+                background-position:10% 10%;
+                background-size: contain;
+            }
+            .info{
+                
+                width:100%;
+                background-color: aliceblue;
+                height: 65px;
+                transition: 1s ease-in-out;
+                overflow:hidden;
+                position:absolute;
+                bottom:0;
+                            
+            }
+            .txtDetails{
+
+                margin-bottom: 5px;
+
+            }
+
+            .info:hover{
+
+                height: 135px;
+
+            }
+
+            #contactme{
+                display:flex;
+                justify-content:center;
+                box-shadow: -5px -5px 10px rgb(24, 24, 24), 5px 5px 10px rgb(37, 37, 37);
+                width: calc(100% - 20px);
+                margin:0 auto;
+                align-items:center;
+                background-image: linear-gradient(#15011ba1,#15011b);
+                flex-direction: column;
+            }
+            #contactme h2, h7{
+                height:max-content;
+            }        
+            #contactMessage{
+                display:flex;
+                align-items: center;
+                justify-content:center;      
+                width:100%;
+            }
+            #input{
+                display: flex;
+                width:max(600px,50%);
+                align-self: center;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+            }
+            #contact{
+                flex:1;
+                border: none;
+            }
+            .contactbox{
+
+                border-radius: 10%;
+                border:0;
+                height:35px;
+            }
+            #Message{
+                flex: 2;
+                border:none;
+            }
+            #Msgbox{
+                width:100%;
+                resize:none;
+                height: 200px;
+
+            }
+
+            .smallp{
+
+                margin-bottom: 5px;
+
+            }
+
+            #submit{
+
+                background-color: white;
+                margin: 5px 0;
+                width: 100px;
+                align-items: center;
+                float:right;
+                display: flex;
+                justify-content: center;
+            }
+
+
+            #bottom{
+                display:block;
+                width:100%;
+                height: 50px;
+            }
+
+            #FaceX{
+
+                float:right;
+            }
+
+            #TisMine{
+
+                float:left;
+                margin-left: 20px;
+
+            }
+
+        </style>
+    
+    </head>
+    
+    <body>
+        
+        <nav class=" flexbox-container" id="top">
+
+            <div>
+
+                <a href="#about">ABOUT ME</a>
+                <a href="#projects">PROJECTS</a>
+                <a href="#contactme">CONTACT ME</a>
+
+            </div>
+
+        </nav>
+
+        <section class="hero flexbox-container">
+
+            <div id="cz"></div>
+
+            <div>
+               
+                <h1>This has been an exciting journey and I cannot wait to conquer</h1>
+                
+            </div>
+        
+            
+            <section class="flexbox-container" id="about">
+        
+                <div>
+                            
+                    <h2>ABOUT ME</h2>
+                    
+                </div>
+
+                <section class="imgTextHolder">
+                    <div id="csharp">
+                    </div>
+                    <div id="Text">
+                        <p> “Well let's introduce a new instruction that has to do the job of both” said the designers and this happened: the programmers was offered a new instruction which decrements a register and branches if the register is greater of equal to zero.<br><br>
+
+                            The same phenomenon happened in many other cases, like instruction that save/restore multiple registers in the case of procedure calls/returns, string manipulating instructions etc.<br><br>
+                        
+                            Another motivation that led to the development of complex instruction sets was the insufficient development of compilers; software was dominated by assembly language in so much that programmers found very pleasant and efficient to have powerful instructions at hand. In this trend many instructions became somehow like procedures, having parameters as the procedures may have, and saving memory in the same way procedures do.
+                        </p>
+
+                    </div>
+                </section>
+        
+            </section>
+        
+        </section>
+
+        <section id="projects">
+
+            <h2 style="color:white"> PROJECTS</h2>
+
+            <div class="flexbox-container" id="project">
+                <div id="LFCProj" class="done">
+                    <div class="info">
+                        <h2>LFC Netspend</h2>
+                        <p class="txtDetails">A simple webpage exploring Liverpool's recent history of keeping a green balancesheet</p>
+                            
+                        <a href="LFC.html" target="_blank">LFC Netspend</a>
+                    </div>
+                </div>
+
+                <div id="BBC2" class="done">
+                    <div class="info">
+                        <h2>BBC clone</h2>
+            
+                        <div class="txtDetails">Some Text</div>
+            
+                        <a href="" target="_blank">BBC Clone</a>
+            
+                    </div>
+                </div>
+
+                <div id="disappShapes"  class="done">
+                    <div id="shapeShift">
+                        
+                    </div>
+                    <div class="info">
+                        <h2>Disappearing Shape</h2>
+            
+                        <div class="txtDetails">A simple game showing some capabilities of Javascript</div>
+            
+                        <a href="../3 javascript/DisappearingShapes.html" target="_blank">Disappearing Shapes</a>
+            
+                    </div>
+                </div>
+                <div id="AsyncPay" class="done">
+                    <div class="info">
+                        <h2>Asyncpay Homepage Copy</h2>
+            
+                        <div class="txtDetails">A more complex application of css, vanilla JS and html to recreate the asyncpay homepage</div>
+            
+                        <a href="AsyncPayCopy.html" target="_blank">AsyncPay Copy</a>
+            
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <section id="contactme">
+
+            <h2>Contact</h2>
+            <h7>Please fill this form to direct any correspondence to me</h7>
+            
+            <div id="contactMessage">
+                <form id="input">
+                        <fieldset id="contact">                    
+                                <label for="Name" class="smallp">Name</label> <br>
+                                <input name="Name" id="Name" class="contactbox" type="text" placeholder="Your name"> <br>
+                                <label for="Subject" class="smallp">Subject</label> <br>
+                                <input name="Subject" id="Subject" class="contactbox" type="text" placeholder="Reason for your Message"> <br>
+                                <label for="Email" class="smallp">Email Address</label> <br>
+                                <input name="Email" id="Email" class="contactbox" type="email" placeholder="Your email address" >
+                        </fieldset>
+
+                        <fieldset id="Message">
+                            <label for="MsgBox" class="smallp">Message</label><br>
+                            <textarea id="Msgbox" name="MsgBox"rows="15"></textarea><br>
+                            <button type="submit" id="submit">Submit</button>
+                        </fieldset>
+                </form>
+            </div>
+            
+        </section>
+        <footer id="bottom">
+            <div id="TisMine">
+                <h5>&copy Xenios 2025</h5>
+                
+            </div>
+                
+            <div id="FaceX">
+
+
+            </div>
+        </footer>
+    </body>
+
+
+</html>
+</body>
+</html>
