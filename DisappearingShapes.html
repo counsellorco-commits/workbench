@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        h1{
+            margin:0 0;
+        }
+        
+        #shapeContainer{
+            width: 1350px;
+            margin: 0 auto;
+        }
+
+        #square1{
+            
+            
+            width:200px;
+            height:200px;
+            margin: 10% auto;
+            position:relative;
+            border: 2px black solid;
+            background-color: black;
+        }
+        
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Test Your Reactions</h1>
+    <p>click on the boxes and circles as quickly as you can</p>
+    <p id="timer"></p>
+    <div id="shapeContainer">
+        <div class="shape" id="square1"></div>
+
+    </div>
+    <script tpye="text/javascript">
+        let i=0;
+        let j=0;
+        let k=0;
+        let setter= setInterval(updateTimer,10);
+        const shape = document.getElementById("square1");
+        function randomize(a){
+            return Math.floor(Math.random()*a)
+        } 
+        function shEmerge(){
+            shape.style.margin= "0 0"
+            shape.style.width = (50 + randomize(151)) + "px";
+            shape.style.height = shape.style.width;
+            shape.style.left = randomize(1100) + "px";
+            shape.style.top = randomize(246) + "px";
+            i= randomize(2);
+            if (i==0){
+                shape.style.borderRadius="50%";
+            } else {
+                shape.style.borderRadius="0";
+            }
+            shape.style.backgroundColor = "rgb(" + randomize(256) + "," + randomize(256) + "," + randomize(256) + ")";
+            shape.style.display = "block";
+            setter=setInterval(updateTimer,10);
+
+        }
+
+        shape.onclick = function(){
+            shape.style.display = "none";
+            setTimeout(shEmerge,randomize(2000));
+            clearInterval(setter);
+            i=k=0;
+
+        }
+
+        function updateTimer(){
+            i++;
+            if(i==100){k++;i=0;}
+            if(i<10) j="0"+i;
+            else j=i;
+            j = k + "." + j;
+            document.getElementById("timer").innerHTML = "Your Time: " + j;
+            if (k==5){ 
+                clearInterval(setter);
+                alert("Too slow! Try again?");   
+            }
+        }
+    </script>
+</body>
+</html>
