@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Pays the bill?</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <style>
+        body{
+            padding:0;
+            margin:0;
+            --yellow:rgb(255, 198, 10);
+        
+        }
+        main{
+            box-sizing: border-box;
+            margin: 5em auto;
+            border: 1px solid black;
+            width: 18em;
+        }
+        span{
+            padding:3px;
+            margin:3px 5px;
+            background-color: var(--yellow);
+            cursor: pointer;
+        }
+        .flex{
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+    </style>
+</head>
+<body>
+    <main id="app">
+        <div v-if="view">
+            <h2>Who pays the bill?</h2>
+            <input id = "aws" type="text" v-model.trim="newPeep">
+            <button @:click="addPeep">Add</button> <br>
+            <div class="flex">
+                <span v-for="name in peeps" @:click="removePeep">
+                {{ name }}
+                </span>
+            </div>
+            <button v-if="peeps.length>1" @:click="changeView">
+                Select The Loser
+            </button>
+        </div>
+        <div v-else>
+            <h2>The loser is:</h2>
+            <h1>
+                {{loser}}
+            </h1>
+            <button @:click="view=!view;peeps.splice([])">Start Over</button><br>
+            <button @:click="selectLoser(loser)">Generate New Loser</button>
+        </div>
+
+
+    </main>
+    
+</body>
+<script>
+    const { createApp, ref, } = Vue;
+        createApp({
+            setup(){
+                let loser = ref("");
+                let view = ref(true);
+                let newPeep = ref("");
+                const peeps = ref([]);
+                function addPeep(){
+                    if(newPeep.value != "" && peeps.value.indexOf(newPeep.value) < 0){
+                        peeps.value.push(newPeep.value);
+                        console.log(peeps.value); 
+                        const a = document.getElementById("aws");
+                        newPeep.value = "";
+                    };
+                }
+                function removePeep(){
+                    let a = event.target.innerHTML;
+                    a = peeps.value.indexOf(a);
+                    console.log(a);
+                    peeps.value.splice(a,1);
+                }
+                function changeView(){
+                    view.value = !view.value;
+                    selectLoser();
+                }
+                function selectLoser(except=""){
+                        let exception = peeps.value.indexOf(except);
+                    if(exception<0){
+                        let a = Math.floor(Math.random()*peeps.value.length);
+                        loser.value = peeps.value[a];
+                    }
+                    else{
+                        exception = peeps.value.splice(exception,1);
+                        let a = Math.floor(Math.random()*peeps.value.length);
+                        loser.value = peeps.value[a];
+                        peeps.value.push(exception[0]);
+                    }
+                }
+                return { loser,view,newPeep,peeps,addPeep,removePeep,changeView,selectLoser }
+            }
+        }).mount("#app")
+</script>
+</html>
